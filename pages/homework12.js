@@ -1,4 +1,5 @@
 const { expect, chromium } = require('@playwright/test');
+const url = 'https://demoqa.com/';
 
 exports.PlaywrightDevPage = class PlaywrightDevPage {
 
@@ -16,8 +17,8 @@ exports.PlaywrightDevPage = class PlaywrightDevPage {
     this.tabOrigin = page.locator('a[id=demo-tab-origin]');
   }
 
-  async goto(section) {
-    await this.page.goto('https://demoqa.com/' + section);
+  async vist() {
+    await this.page.goto(url + 'books');
     await this.page.waitForLoadState('networkidle');
   }
 
@@ -26,12 +27,16 @@ exports.PlaywrightDevPage = class PlaywrightDevPage {
   }
 
   async openLoginForm() {
+    await this.page.goto(url + 'books');
+    await this.page.waitForLoadState('networkidle');
     await expect(this.loginButton).toBeVisible();
     await this.loginButton.click();
     await this.page.waitForLoadState('networkidle');
   }
 
   async logIn(login, password) {
+    await this.page.goto(url + 'login');
+    await this.page.waitForLoadState('networkidle');
     await expect(this.loginInput).toBeVisible();
     await expect(this.passwordInput).toBeVisible();
     await this.loginInput.fill(login);
@@ -46,7 +51,15 @@ exports.PlaywrightDevPage = class PlaywrightDevPage {
     await this.page.waitForLoadState('networkidle');
   }
 
+  async defaultTab() {
+    await this.page.goto(url + 'tabs');
+    await this.page.waitForLoadState('networkidle');
+    await expect(this.tabWhat).toBeVisible();
+  }
+
   async switchTab() {
+    await this.page.goto(url + 'tabs');
+    await this.page.waitForLoadState('networkidle');
     await expect(this.tabWhat).toBeVisible();
     await expect(this.tabWhat).toHaveClass('nav-item nav-link active');
     await this.tabOrigin.click();

@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/nlapshin/playwright-example/issues"
   },
-  "homepage": "https://github.com/nlapshin/playwright-example#readme"
+  "homepage": "https://github.com/nlapshin/playwright-example#readme",
+  "dependencies": {
+    "codeceptjs": "^2.6.11"
+  }
 }
